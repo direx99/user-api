@@ -13,13 +13,7 @@ app.use(bodyParser.json());
 
 const URL = process.env.MONGODB_URL;
 mongoose.set("strictQuery", false);
-
 mongoose.connect(URL,{
-   
-    
-   
-    
-     
 });
 
 const connection = mongoose.connection;
@@ -27,10 +21,13 @@ connection.once('open',()=>{
     console.log("Mongo DB Connected Successfuly done !");
 })
 
+//importing user schema
+const userRouter = require("./routes/users.js");
 
+//to load the users page
+app.use("/user",userRouter)
 
 
 app.listen(PORT,()=>{
     console.log(`server is up & PORT is "${PORT}`);
-
 })
