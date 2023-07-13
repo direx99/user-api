@@ -5,10 +5,13 @@ let User = require("../models/User");
 router.route("/").post((req,res) => {
     const name = req.body.name;
     const email = req.body.email;
+    const age = req.body.age;
+
 
     const newUser = new User({
         name,
-        email
+        email,
+        age
     })
 
     newUser.save().then(() =>{
