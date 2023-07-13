@@ -25,7 +25,17 @@ routers.post('/questions', async (req, res) => {
   });
 
 //create route to view questions 
- 
+//get question by day
+routers.route("/viewqq/:day").get(async (req,res) =>{
+    let day = req.params.day;
+    const question = await Question.find({day})
+    .then((question) =>{
+        res.status(200).send({status: "User fetched", question})
+    }).catch((err) =>{
+        console.log(err.message);
+        res.status(500).send({status: "Error while fetching", error: err.message})
+    })
+})  
 
   //delete 
   routers.route("/delete").delete(async (req, res) => {
