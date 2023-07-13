@@ -23,12 +23,18 @@ const questionSchema = new Schema({
     },
     result : {
         //data type of attribute
-        type : String,
+        type : Number,
         //not null validation
         required: true
     },
+    answers: {
+        //data type of attribute
+        type : Array,
+        //default value
+        default: []
+    }
 
 })
 
-const Question = mongoose.model("Question",userSchema);
+const Question = mongoose.model("Question",questionSchema);
 module.exports = Question;

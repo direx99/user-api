@@ -24,9 +24,14 @@ connection.once('open',()=>{
 //importing user schema
 const userRouter = require("./routes/users.js");
 
+//import question schema
+const questionRouter = require("./routes/questions.js");
+
 //to load the users page
 app.use("/user",userRouter)
 
+// //load questions page
+// app.use("/quest",questionRouter)
 
 app.listen(PORT,()=>{
     console.log(`server is up & PORT is "${PORT}`);
