@@ -5,7 +5,7 @@ let User = require("../models/User");
 router.route("/").post((req,res) => {
     const name = req.body.name;
     const email = req.body.email;
-    const age = req.body.age;
+    const age = Number(req.body.age);
 
 
     const newUser = new User({
@@ -50,11 +50,12 @@ router.route("/getid/:id").get(async (req,res) =>{
 //update user by id
 router.route("/update/:id").put(async (req,res) => {
     let userID = req.params.id;
-    const{name,email} = req.body;
+    const{name,email,age} = req.body;
 
     const updateUser = {
         name,
-        email
+        email,
+        age
     }
 
     const update = await User.findByIdAndUpdate(userID,updateUser).then(() =>{

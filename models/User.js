@@ -14,6 +14,10 @@ const userSchema = new Schema({
         type : String,
         //not null validation
         required: true
+    },
+    age : {
+        type : Number,
+        required : true
     }
 })
 
