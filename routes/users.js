@@ -25,7 +25,7 @@ router.route("/").post((req,res) => {
 
 //create route to view users 
 //get all users
-router.route("/view").get((req,res) =>{
+router.route("/").get((req,res) =>{
     //here we view all students find()
     User.find().then((getuser) =>{
         res.json(getuser)
@@ -35,7 +35,7 @@ router.route("/view").get((req,res) =>{
 })
 
 //get only 1 user by id
-router.route("/getid/:id").get(async (req,res) =>{
+router.route("/:id").get(async (req,res) =>{
     let userID = req.params.id;
     const user = await User.findById(userID)
     .then((user) =>{
@@ -48,7 +48,7 @@ router.route("/getid/:id").get(async (req,res) =>{
 
 
 //update user by id
-router.route("/update/:id").put(async (req,res) => {
+router.route("/:id").put(async (req,res) => {
     let userID = req.params.id;
     const{name,email,age} = req.body;
 
@@ -70,7 +70,7 @@ router.route("/update/:id").put(async (req,res) => {
 
 
 //delete route 
-router.route("/delete/:id").delete(async (res,rep) =>{
+router.route("/:id").delete(async (res,rep) =>{
     let userID = req.params.id;
 
     await User.findByIdAndDelete(userID).then(() =>{
