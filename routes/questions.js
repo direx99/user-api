@@ -25,7 +25,7 @@ routerq.post('/questions', async (req, res) => {
 
 //create route to view questions 
 //get all questions
-routerq.route("/viewq").get((req,res) =>{
+routerq.route("/").get((req,res) =>{
     //here we view all students find()
     Question.find().then((getquestion) =>{
         res.json(getquestion)
@@ -36,7 +36,7 @@ routerq.route("/viewq").get((req,res) =>{
 
 
 //get question by day
-routerq.route("/viewqq/:day").get(async (req,res) =>{
+routerq.route("/day/:day").get(async (req,res) =>{
     let day = req.params.day;
     const question = await Question.find({day})
     .then((question) =>{
@@ -48,7 +48,7 @@ routerq.route("/viewqq/:day").get(async (req,res) =>{
 })  
 
   //delete 
-  routerq.route("/delete").delete(async (req, res) => {
+  routerq.route("/").delete(async (req, res) => {
     try {
       await Question.deleteMany();
       res.status(200).send({ status: "Questions deleted" });
