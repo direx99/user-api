@@ -36,6 +36,7 @@ routerq.route("/").get((req,res) =>{
 
 
 //get question by day
+
 routerq.route("/day/:day").get(async (req,res) =>{
     let day = req.params.day;
     const question = await Question.find({day})
@@ -58,6 +59,7 @@ routerq.route("/day/:day").get(async (req,res) =>{
     }
   });
   
+
 
 
 module.exports = routerq;
