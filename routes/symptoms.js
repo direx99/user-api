@@ -26,7 +26,7 @@ routers.post('/', async (req, res) => {
 
 //create route to view questions 
 //get question by day
-routers.route("/viewqq/:day").get(async (req,res) =>{
+routers.route("/questionbyday/:day").get(async (req,res) =>{
     let day = req.params.day;
     const question = await Question.find({day})
     .then((question) =>{
@@ -38,7 +38,7 @@ routers.route("/viewqq/:day").get(async (req,res) =>{
 })  
 
   //delete 
-  routers.route("/delete").delete(async (req, res) => {
+  routers.route("/").delete(async (req, res) => {
     try {
       await Question.deleteMany();
       res.status(200).send({ status: "Symptoms deleted" });
