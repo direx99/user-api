@@ -29,9 +29,15 @@ const symptomSchema = new Schema({
         type : Array,
         //not null validation
         required: true
+    },
+    keywords : {
+        //data type of attribute
+        type : Array,
+        //not null validation
+        required: true
     }
 
 })
 
-const Symptom = mongoose.model("Symtom",symptomSchema)
+const Symptom = mongoose.model("Symptom",symptomSchema)
 module.exports = Symptom
