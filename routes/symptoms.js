@@ -3,7 +3,7 @@ let Question = require("../models/Question");
 const Symptom = require("../models/Symtom");
 
 //create route to create a question assign day 
-routers.post('/questions', async (req, res) => {
+routers.post('/', async (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
     const features = req.body.features;
