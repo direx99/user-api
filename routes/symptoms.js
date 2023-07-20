@@ -78,18 +78,20 @@ routers.route("/").delete(async (req, res) => {
 // });
 
 //keyword selection and sorting
-routers.route("/keyword/:word").get(async (req, res) => {
+// Updated route to handle multiple keywords
+// Updated route to show symptoms that have all the entered keywords
+routers.route("/keywords/:words").get(async (req, res) => {
   try {
-    const keyword = req.params.word;
+    const keywords = req.params.words.split(","); // Assuming the keywords are separated by commas
 
-    //searching if keyword present
-    const searchRegex = new RegExp(keyword, "i");
+    // Convert each keyword to a case-insensitive regex
+    const searchRegexes = keywords.map(keyword => new RegExp(keyword, "i"));
 
-    // Search for documents where keyword matching
-    const matchedSymptoms = await Symptom.find({ keywords: searchRegex });
+    // Search for documents where all the keywords are present in the 'keywords' field
+    const matchedSymptoms = await Symptom.find({ keywords: { $all: searchRegexes } });
 
     // Sort the matchedSymptoms array in descending order based on the number of matching keywords
-    matchedSymptoms.sort((a, b) => b.keywords.filter((kw) => kw.match(searchRegex)).length - a.keywords.filter((kw) => kw.match(searchRegex)).length);
+    matchedSymptoms.sort((a, b) => b.keywords.filter(kw => searchRegexes.some(regex => regex.test(kw))).length - a.keywords.filter(kw => searchRegexes.some(regex => regex.test(kw))).length);
 
     //The top 5 collections
     const top5Symptoms = matchedSymptoms.slice(0, 5);
@@ -100,6 +102,8 @@ routers.route("/keyword/:word").get(async (req, res) => {
     res.status(500).send({ status: "Error while fetching symptoms", error: err.message });
   }
 });
+
+
 
 
 module.exports = routers;
